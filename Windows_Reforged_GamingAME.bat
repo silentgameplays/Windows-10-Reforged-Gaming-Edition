@@ -372,7 +372,7 @@ cls
 		:: Recommended optional packages include: libreoffice steam adobeair ffmpeg mpv youtube-dl directx cygwin babun transmission-qt audacity cdrtfe syncthing keepass qbittorent steam origin goggalaxy epicgameslauncher uplay obs googlechrome gimp shotcut ddu googlechrome chromium shotcut
                 
 		
-		@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums firefox vlc 7zip open-shell -installArgs ADDLOCAL=StartMenu jpegview vcredist-all directx onlyoffice steam goggalaxy ddu obs googlechrome gimp shotcut"
+		@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums firefox vlc 7zip open-shell -installArgs ADDLOCAL=StartMenu jpegview vcredist-all directx onlyoffice steam goggalaxy obs gimp shotcut"
 
 
 :: reg add "HKEY_CLASSES_ROOT\Directory\shell\Open with MPV" /v icon /t REG_SZ /d "C:\\ProgramData\\chocolatey\\lib\\mpv.install\\tools\\mpv-document.ico" /f

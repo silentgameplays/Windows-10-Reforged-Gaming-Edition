@@ -1,4 +1,5 @@
-﻿#!/bin/bash
+#!/bin/bash
+
 clear
 echo "                 ╔═══════════════╗"
 echo "                 ║ !!!WARNING!!! ║"
@@ -8,20 +9,24 @@ echo "║ If your computer no longer boots, explodes, or    ║"
 echo "║ divides by zero, you are the only one responsible ║"
 echo "╟╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╢"
 echo "║ This script only works on Debian based distros.   ║"
-echo "║ An Ubuntu/Linux Mint 20.04 Live ISO recommended.  ║"
+echo "║ An Ubuntu Live ISO is recommended.                ║"
 echo "╚═══════════════════════════════════════════════════╝"
 echo ""
 read -p "To continue press [ENTER], or Ctrl-C to exit"
 
 title_bar() {
 	clear
-	echo "╔═══════════════════════════════════════════════════╗"
-	echo "║ AMEliorate Windows GE 10 2004H2          20.24.10 ║"
-	echo "╚═══════════════════════════════════════════════════╝"
+	echo "╔═════════════════════════════════════════════════════╗"
+	echo "║ AMEliorate Windows 10 2004               2020.10.31 ║"
+	echo "╚═════════════════════════════════════════════════════╝"
+	echo ""
 }
 
 # prompts to install git and 7zip if not already installed
 title_bar
+	echo "This script requires the installation of a few"
+	echo "dependencies. Please enter your password below."
+	echo ""
 sudo apt update
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' git|grep "install ok installed")
 echo "Checking for git: $PKG_OK"
@@ -38,19 +43,33 @@ fi
 
 # prompts to install fzf if not already installed
 title_bar
-echo "fzf is required for this script to function"
+echo "The program fzf is required for this script to function"
 echo "Please allow for fzf to install following this message"
 echo "Enter "y" (yes) for all prompts"
+echo ""
 read -p "To continue press [ENTER], or Ctrl-C to exit"
 echo "\n"
 title_bar
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+title_bar
+echo "Checking for existing AME Backup"
+FILE=./AME_Backup/
+if [ -d $FILE ]; then
+	now=$(date +"%Y.%m.%d.%H.%M")
+	7z a AME_Backup_$now.zip AME_Backup/
+	rm -rf AME_Backup/
+else
+   echo "$FILE' not found, continuing"
+fi
+
+
+
 # start AME process
 title_bar
 echo "Starting AME process, searching for files..."
-Term=(applocker autologger clipsvc clipup cortana DeliveryOptimization diagtrack dmclient dosvc EnhancedStorage homegroup hotspot invagent microsoftedge.exe msra sihclient slui startupscan storsvc usoclient usocore windowsmaps windowsupdate wsqmcons wua wus)
+Term=(autologger clipsvc clipup DeliveryOptimization DeviceCensus.exe diagtrack dmclient dosvc EnhancedStorage homegroup hotspot invagent microsoftedge.exe msra sihclient slui startupscan storsvc usoclient usocore windowsmaps windowsupdate wsqmcons wua wus)
 touch fzf_list.txt
 for i in "${Term[@]}"
 do
@@ -60,20 +79,24 @@ done
 
 # check if fzf found anything
 title_bar
-FZFCHECK = wc -l fzf_list.txt
-if FZFCHECK = 0; then
-	echo "ERROR! no files found, exiting..."
-	exit 1
-elif FZFCHECK > 0; then
+if [ -s fzf_list.txt ]
+then
 	echo "Directory file not empty, continuing..."
+else
+	echo "ERROR! no files found, exiting..."
+	exit 1	
 fi
 
-# directory processing starts here!
+# directory processing starts here
 rm dirs*
 touch dirs.txt
 
-# removes the FileMaps directories/files
-awk '!/FileMaps/' fzf_list.txt > fzf_list_cleaned.txt
+# removes some outliers that are needed
+awk '!/FileMaps/' fzf_list.txt > fzf_list_cleaned1.txt
+awk '!/WinSxS/' fzf_list_cleaned1.txt > fzf_list_cleaned2.txt
+awk '!/MSRAW/' fzf_list_cleaned2.txt > fzf_list_cleaned3.txt
+awk '!/msrating/' fzf_list_cleaned3.txt > fzf_list_cleaned.txt
+
 # removes everything after the last slash in the file list
 sed 's%/[^/]*$%/%' fzf_list_cleaned.txt >> dirs.txt
 
@@ -110,7 +133,8 @@ rm dirs*
 awk -v quote='"' '{print "cp -fa --preserve=all " quote $0 quote " " quote "AME_Backup/" $0 quote}' fzf_list_cleaned.txt > backup.txt
 # adds individual directories to top of script
 echo 'cp -fa --preserve=all "Program Files/Internet Explorer" "AME_Backup/Program Files/Internet Explorer"' | cat - backup.txt > temp && mv temp backup.txt
-echo 'cp -fa --preserve=all "Program Files/WindowsApps" "AME_Backup/Program Files/WindowsApps"' | cat - backup.txt > temp && mv temp backup.txt
+# Appx fix testing
+#echo 'cp -fa --preserve=all "Program Files/WindowsApps" "AME_Backup/Program Files/WindowsApps"' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all "Program Files/Windows Defender" "AME_Backup/Program Files/Windows Defender"' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all "Program Files/Windows Mail" "AME_Backup/Program Files/Windows Mail"' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all "Program Files/Windows Media Player" "AME_Backup/Program Files/Windows Media Player"' | cat - backup.txt > temp && mv temp backup.txt
@@ -125,6 +149,8 @@ echo 'cp -fa --preserve=all Windows/SystemApps/*ContentDeliveryManager* AME_Back
 echo 'cp -fa --preserve=all Windows/SystemApps/Microsoft.MicrosoftEdge* AME_Backup/Windows/SystemApps' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all Windows/SystemApps/Microsoft.Windows.Cortana* AME_Backup/Windows/SystemApps' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all Windows/SystemApps/Microsoft.XboxGameCallableUI* AME_Backup/Windows/SystemApps' | cat - backup.txt > temp && mv temp backup.txt
+echo 'cp -fa --preserve=all Windows/System32/smartscreen.exe AME_Backup/Windows/System32/' | cat - backup.txt > temp && mv temp backup.txt
+echo 'cp -fa --preserve=all Windows/System32/smartscreenps.dll AME_Backup/Windows/System32/' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all Windows/diagnostics/system/Apps AME_Backup/Windows/diagnostics/system' | cat - backup.txt > temp && mv temp backup.txt
 echo 'cp -fa --preserve=all Windows/diagnostics/system/WindowsUpdate AME_Backup/Windows/diagnostics/system' | cat - backup.txt > temp && mv temp backup.txt
 echo '#!/bin/bash' | cat - backup.txt > temp && mv temp backup.txt
@@ -135,7 +161,7 @@ chmod +x backup.sh
 # creates recovery script
 awk -v quote='"' '{print "cp -fa --preserve=all " quote "AME_Backup/" $0 quote " " quote $0 quote}' fzf_list_cleaned.txt > restore.txt
 echo 'cp -fa --preserve=all "AME_Backup/Program Files/Internet Explorer" "Program Files/Internet Explorer"' | cat - restore.txt > temp && mv temp restore.txt
-echo 'cp -fa --preserve=all "AME_Backup/Program Files/WindowsApps" "Program Files/WindowsApps"' | cat - restore.txt > temp && mv temp restore.txt
+#echo 'cp -fa --preserve=all "AME_Backup/Program Files/WindowsApps" "Program Files/WindowsApps"' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all "AME_Backup/Program Files/Windows Defender" "Program Files/Windows Defender"' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all "AME_Backup/Program Files/Windows Mail" "Program Files/Windows Mail"' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all "AME_Backup/Program Files/Windows Media Player" "Program Files/Windows Media Player"' | cat - restore.txt > temp && mv temp restore.txt
@@ -150,6 +176,8 @@ echo 'cp -fa --preserve=all AME_Backup/Windows/SystemApps/*ContentDeliveryManage
 echo 'cp -fa --preserve=all AME_Backup/Windows/SystemApps/Microsoft.MicrosoftEdge* Windows/SystemApps' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all AME_Backup/Windows/SystemApps/Microsoft.Windows.Cortana* Windows/SystemApps' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all AME_Backup/Windows/SystemApps/Microsoft.XboxGameCallableUI* Windows/SystemApps' | cat - restore.txt > temp && mv temp restore.txt
+echo 'cp -fa --preserve=all AME_Backup/Windows/System32/smartscreen.exe Windows/System32/' | cat - restore.txt > temp && mv temp restore.txt
+echo 'cp -fa --preserve=all AME_Backup/Windows/System32/smartscreenps.dll Windows/System32/' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all AME_Backup/Windows/diagnostics/system/Apps Windows/diagnostics/system' | cat - restore.txt > temp && mv temp restore.txt
 echo 'cp -fa --preserve=all AME_Backup/Windows/diagnostics/system/WindowsUpdate Windows/diagnostics/system' | cat - restore.txt > temp && mv temp restore.txt
 awk '{ print length($0) " " $0; }' restore.txt | sort -n | cut -d ' ' -f 2- > restore.sh
@@ -162,7 +190,7 @@ chmod +x restore.sh
 # creates removal script
 awk -v quote='"' '{print "rm -rf " quote $0 quote}' fzf_list_cleaned.txt > remove.sh
 echo 'rm -rf "Program Files/Internet Explorer"' | cat - remove.sh > temp && mv temp remove.sh
-echo 'rm -rf "Program Files/WindowsApps"' | cat - remove.sh > temp && mv temp remove.sh
+#echo 'rm -rf "Program Files/WindowsApps"' | cat - remove.sh > temp && mv temp remove.sh
 echo 'rm -rf "Program Files/Windows Defender"' | cat - remove.sh > temp && mv temp remove.sh
 echo 'rm -rf "Program Files/Windows Mail"' | cat - remove.sh > temp && mv temp remove.sh
 echo 'rm -rf "Program Files/Windows Media Player"' | cat - remove.sh > temp && mv temp remove.sh
@@ -188,16 +216,9 @@ echo 'rm -rf "Windows/System32/SecurityHealthSystray.exe"' | cat - remove.sh > t
 echo '#!/bin/bash' | cat - remove.sh > temp && mv temp remove.sh
 chmod +x remove.sh
 
-# runs the scripts
+
+
 title_bar
-FILE=./AME_Backup/
-if [ -d $FILE ]; then
-	now=$(date +"%Y.%m.%d.%H.%M")
-	7z a AME_Backup_$now.zip AME_Backup/
-	rm -rf AME_Backup/
-else
-   echo "$FILE' not found, continuing"
-fi
 echo "Creating Directories"
 ./mkdirs.sh
 echo "Done."
@@ -209,4 +230,8 @@ echo "Removing files"
 echo "Done."
 sync
 title_bar
+rm fzf_list_cleaned.txt
+rm fzf_list_cleaned1.txt
+rm fzf_list_cleaned2.txt
+rm fzf_list_cleaned3.txt
 echo "You may now reboot into Windows"

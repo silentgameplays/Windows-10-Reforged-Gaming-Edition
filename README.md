@@ -15,7 +15,7 @@ Windows 10 Reforged Gaming Edition
 
 # 1.Download and install Windows 10 2004 build using Rufus https://rufus.ie/:
 * https://www.microsoft.com/en-us/software-download/windows10
-
+* https://tb.rg-adguard.net/public.php
 # 2.(Optional)Activate using a generic Windows key if it is not activated already.
 * GENERIC KMS KEYS FROM https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys:
 * Windows 10 Pro	

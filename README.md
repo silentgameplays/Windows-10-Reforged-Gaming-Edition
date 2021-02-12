@@ -98,17 +98,18 @@ Windows 10 Reforged Gaming Edition
 * Disable UAC after that or the annoying prompts :(
 
 # 17.For Clean Driver install you will need(included in script):
-https://www.guru3d.com/files-details/display-driver-uninstaller-download.html
+* https://www.guru3d.com/files-details/display-driver-uninstaller-download.html
 
 # 18.FOR NVIDIA USERS Optimal NVIDIA Driver with Control Panel(not tied to Windows 10 Store)you need to select the Standard Version via advanced driver search and install it using DDU removing DCH!
-# Link to latest Standard Studio Driver:
-https://www.nvidia.com/download/driverResults.aspx/163533/en-us
-# Link to latest stable Standard Studio Driver 452.06:
-* https://www.nvidia.com/download/driverResults.aspx/163246/en-us
 
+# Link To current Standard Studio Driver 461.40
+* https://www.nvidia.com/download/driverResults.aspx/170342/en-us
+# Link To older Standard Studio Driver 460.89
+* https://www.nvidia.com/download/driverResults.aspx/167759/en-us
+# Link to older Standard Studio Driver 452.06:
+* https://www.nvidia.com/download/driverResults.aspx/163246/en-us
 # Link to older stable Standard Studio Driver 442.92:
 * https://www.nvidia.com/download/driverResults.aspx/159677/en-us
-
 
 # 19 If you run into NET 3.5 Framework installation problem later on.Here are the steps:
 * Input your Windows 10 install media ISO via Windows or via USB to drive D for example.

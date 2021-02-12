@@ -152,7 +152,7 @@ https://obsproject.com/download
 # If you want to list packages and remove them yourself or make your own script then run powershell as admin:
 * DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
 # Then run with the packages you get from the previous command (except for stuff like Calculator/MSPaint):
-* Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.WindowsStore_11805.1001.4913.0_neutral_~_8wekyb3d8bbwe
+* Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.WindowsStore_11910.1002.513.0_neutral_~_8wekyb3d8bbwe
 
 # Thats it we are good to go.Enjoy!
 # Check out the AMEliorated project that inspired this Windows Reforged project,the only difference we used different approaches and builds! 

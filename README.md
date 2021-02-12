@@ -155,6 +155,9 @@ https://obsproject.com/download
 # Then run with the packages you get from the previous command (except for stuff like Calculator/MSPaint):
 * Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.WindowsStore_11910.1002.513.0_neutral_~_8wekyb3d8bbwe
 
+# 24.For Older Games DirectX 9,10,11
+https://www.dropbox.com/sh/87qq1i6ozorktr7/AABGZFMcSnBTXw8StzqVyepya?dl=0
+
 # Thats it we are good to go.Enjoy!
 # Check out the AMEliorated project that inspired this Windows Reforged project,the only difference we used different approaches and builds! 
 # https://ameliorated.info/documentation.html#install

@@ -1,12 +1,4 @@
-If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
-{   
-#"No Administrative rights, it will display a popup window asking user for Admin rights"
-
-$arguments = "& '" + $myinvocation.mycommand.definition + "'"
-Start-Process "$psHome\powershell.exe" -Verb runAs -ArgumentList $arguments
-
-break
-}
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.549981C3F5F10_1.1911.21713.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.BingWeather_4.12.3003.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.DesktopAppInstaller_2020.1111.2238.0_neutral_~_8wekyb3d8bbwe

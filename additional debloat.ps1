@@ -1,3 +1,12 @@
+If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+{   
+#"No Administrative rights, it will display a popup window asking user for Admin rights"
+
+$arguments = "& '" + $myinvocation.mycommand.definition + "'"
+Start-Process "$psHome\powershell.exe" -Verb runAs -ArgumentList $arguments
+
+break
+}
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.549981C3F5F10_1.1911.21713.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.BingWeather_4.12.3003.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.DesktopAppInstaller_2020.1111.2238.0_neutral_~_8wekyb3d8bbwe
@@ -37,4 +46,4 @@ Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.XboxIdentityProvide
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.XboxSpeechToTextOverlay_1.21.13002.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.YourPhone_2019.430.2026.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.ZuneMusic_2019.20122.11121.0_neutral_~_8wekyb3d8bbwe
-Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.ZuneVideo_2019.20112.10111.0_neutral_~_8wekyb3d8bbw
+Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.ZuneVideo_2019.20112.10111.0_neutral_~_8wekyb3d8bbwe

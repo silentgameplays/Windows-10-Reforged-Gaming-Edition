@@ -148,6 +148,12 @@ https://www.shotcut.org/
 * for streaming and recording use original obs studio:
 https://obsproject.com/download
 
+# 23. (Optional) Run additional debloat.ps1 script as admin or just open it and run all the lines,line by line in PowerShell (this completely removes stuff like xbox/store)
+# If you want to list packages and remove them yourself or make your own script then run powershell as admin:
+* DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
+# Then run with the packages you get from the previous command (except for stuff like Calculator/MSPaint):
+* Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.WindowsStore_11805.1001.4913.0_neutral_~_8wekyb3d8bbwe
+
 # Thats it we are good to go.Enjoy!
 # Check out the AMEliorated project that inspired this Windows Reforged project,the only difference we used different approaches and builds! 
 # https://ameliorated.info/documentation.html#install

@@ -39,3 +39,4 @@ Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.XboxSpeechToTextOve
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.YourPhone_2019.430.2026.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.ZuneMusic_2019.20122.11121.0_neutral_~_8wekyb3d8bbwe
 Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.ZuneVideo_2019.20112.10111.0_neutral_~_8wekyb3d8bbwe
+Remove-ProvisionedAppxPackage -Online -PackageName Microsoft.MicrosoftEdge.Stable_88.0.705.63_neutral__8wekyb3d8bbwe

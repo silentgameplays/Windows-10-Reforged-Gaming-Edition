@@ -158,6 +158,9 @@ https://obsproject.com/download
 # 24.For Older Games DirectX 9,10,11
 https://www.dropbox.com/sh/87qq1i6ozorktr7/AABGZFMcSnBTXw8StzqVyepya?dl=0
 
+# 25. Cleanup all udpates used in the installation process cmd as Admin:
+* DISM.exe /Online /Cleanup-Image /StartComponentCleanup
+
 # Thats it we are good to go.Enjoy!
 # Check out the AMEliorated project that inspired this Windows Reforged project,the only difference we used different approaches and builds! 
 # https://ameliorated.info/documentation.html#install

@@ -430,9 +430,9 @@ timeout /t 1 /nobreak > NUL
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 
 :: Add/Remove packages here. Use chocolatey to 'search' for packages matching a term to get the proper name or head over to https://chocolatey.org/packages
-:: Recommended optional packages include: libreoffice steam adobeair ffmpeg mpv youtube-dl directx cygwin babun transmission-qt audacity cdrtfe obs syncthing keepass epicgameslauncher googlechrome
+:: Recommended optional packages include: libreoffice steam adobeair ffmpeg mpv youtube-dl directx cygwin babun transmission-qt audacity cdrtfe obs syncthing keepass epicgameslauncher googlechrome qbittorrent steam origin goggalaxy uplay obs-studio gimp shotcut
 
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums firefox open-shell vlc 7zip jpegview vcredist-all directx onlyoffice qbittorrent steam origin goggalaxy uplay obs-studio gimp shotcut"
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums firefox open-shell vlc 7zip jpegview vcredist-all directx onlyoffice steam"
 
 :: Configure Open-Shell
 :testos

@@ -1,0 +1,5 @@
+Full Screen with NVIDIA for OLD Games
+1. Control Panel>Adjust desktop size and position
+2. Apply the Following Settings>Full Screen
+3. Select the Overrride the scaling mode set by games and programs
+Enjoy

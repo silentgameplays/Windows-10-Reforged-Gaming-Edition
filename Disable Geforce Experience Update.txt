@@ -1,0 +1,61 @@
+How to do this in newer GFE Versions (Full Guide)
+
+
+
+1. Install GFE, it should launch automatically where you sign into your account and stuff
+
+
+
+2. Close the GFE
+
+
+
+3. Go to firewall settings and create a New Rule
+
+
+
+4. Navigate to C:\Program Files (x86)\NVIDIA Corporation\NvNode\NVIDIA Web Helper.exe 
+
+(You might need to enable "Show Hidden Files and Folders" in your windows settings to see this
+
+This is the .exe that sneakily downloads new updates every time you launch the GFE
+
+
+
+5. Select Block all internet connection and finish the Rule
+
+
+
+6. Dont start the GFE again yet ! The update files were probably already downloaded while you were signing into you GFE acc. and it will try to install the update
+
+   the next time you launch the GFE, so DONT !
+
+
+
+7. Make sure the folder "C:\ProgramData\NVIDIA Corporation\Downloader" doesnt contain a folder called something like 01958FD89727572FH285JF8275 or
+
+    similar file named by such Letters and Numbers jibberish.. If you have such a folder there, delete it, as it contains the update files
+
+
+
+8. Make sure the folder "C:\ProgramData\NVIDIA Corporation\Downloader\PostProcessing\GFE" doesnt contain any files or folders.. If it has many folders and
+
+   also some "setup.exe" file in there, select all those files and folders along with that "setup.exe" and delete those, as this is the update files just as previous one but
+
+   now its unpacked, waiting to be installed by the GFE the next time you launch it
+
+
+
+9. If you blocked that mentioned .exe file in your firewall and deleted all the updates, you may now launch the GFE
+
+
+
+Note: If you cant find the folders or files mentioned above, you might have those under a different path, look for those folders in your system
+
+
+
+Note2: If you dont have folders "Downloader" or "PostProcessing\GFE" look for a folder named "Update" that might have these updates in it
+
+
+
+Note3: I am using this for GFE version 3.14.0.139 which is the last version that works on my OS.

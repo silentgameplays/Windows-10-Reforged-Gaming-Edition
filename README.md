@@ -161,6 +161,16 @@ https://www.dropbox.com/sh/87qq1i6ozorktr7/AABGZFMcSnBTXw8StzqVyepya?dl=0
 # 25. Cleanup all udpates used in the installation process cmd as Admin:
 * DISM.exe /Online /Cleanup-Image /StartComponentCleanup
 
+# 26. Removing the Edge browser
+* Go to Start menu>Run or Windows key + X>Run
+* C:\Program Files (x86)\Microsoft\Edge\Application\ put this in there and click run
+* Find the Installer folder will look like this Application\92.0.902.67\Installer\ this 92.0.902.67 might vary from build to build so use the one that is right for your system
+* run CMD or Powershell as Admin and run the following command use quotes "" around the location 
+* "C:\Program Files (x86)\Microsoft\Edge\Application\92.0.902.67\Installer\setup.exe" --uninstall --system-level --verbose-logging --force-uninstall
+* No need for additional registry tinkering since its stripped clean of Windows meddling in the installation of apps
+* on Non-Ameliorated versions of Windows
+* Run regedit
+* Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate needs to be added with a DWORD called DoNotUpdateToEdgeWithChromium with a value of 1.
 # Thats it we are good to go.Enjoy!
 # Check out the AMEliorated project that inspired this Windows Reforged project,the only difference we used different approaches and builds! 
 # https://ameliorated.info/documentation.html#install

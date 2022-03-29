@@ -177,7 +177,7 @@ https://www.dropbox.com/sh/87qq1i6ozorktr7/AABGZFMcSnBTXw8StzqVyepya?dl=0
 
 # Thanks!
 # SilentGameplayZZ
- https://www.youtube.com/c/SilentGameplayZZ/
+ https://www.youtube.com/c/SilentGamePLS/
 # Youtube video on how to:
  https://youtu.be/8EHdjS8D-fs
 
